@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+#wrap a:link {
+	text-decoration: none;
+	color: black;
+}
+
+#wrap a:hover {
+	color: Tomato;
+	background: Linen;
+}
+
+#wrap a:visited {
+	color: black;
+}
+
+.list {
+	width: 70%;
+	border: 2px solid Plum;	
+}
+
+.list tr td {
+	border: 1px solid LightGray;
+	padding: 10px;
+}
+
+.list tr :first-child {
+	font-weight: bold;
+}
+
+
+
+h1 {
+	color: MediumOrchid;
+}
+
+.head {
+	background: Plum;
+}
+
+.head th {
+	text-align: center;
+}
+
+.record :first-child {
+	text-align: center;
+}
+

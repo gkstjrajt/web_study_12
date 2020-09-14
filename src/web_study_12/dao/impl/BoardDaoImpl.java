@@ -31,7 +31,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<Board> selectBoardByAll() {
-		String sql = "SELECT NUM, PASS, NAME, EMAIL, TITLE, CONTENT, READCOUNT, WRITEDATE FROM BOARD";
+		String sql = "SELECT NUM, PASS, NAME, EMAIL, TITLE, CONTENT, READCOUNT, WRITEDATE FROM BOARD ORDER BY NUM";
 		try(PreparedStatement pstmt = con.prepareStatement(sql)){
 				ResultSet rs = pstmt.executeQuery();
 				if(rs.next()) {
@@ -61,15 +61,13 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int insertBoard(Board board) {
-		String sql = "INSERT INTO BOARD(PASS, NAME, EMAIL, TITLE, CONTENT, READCOUNT, WRITEDATE) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO BOARD(NAME, PASS, EMAIL, TITLE, CONTENT) VALUES(?, ?, ?, ?, ?)";
 		try(PreparedStatement pstmt = con.prepareStatement(sql)){
-					pstmt.setString(1, board.getPass());
-					pstmt.setString(2, board.getName());
+					pstmt.setString(1, board.getName());
+					pstmt.setString(2, board.getPass());
 					pstmt.setString(3, board.getEmail());
 					pstmt.setString(4, board.getTitle());
 					pstmt.setString(5, board.getContent());
-					pstmt.setInt(6, board.getReadCount());
-					pstmt.setTimestamp(7, new Timestamp(board.getWriteDate().getTime()));
 				return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new CustomSQLException(e);
@@ -141,8 +139,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int deleteBoard(int num) {
 		String sql = "DELETE FROM BOARD WHERE NUM = ?";
-		try(Connection con = JndiDS.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(PreparedStatement pstmt = con.prepareStatement(sql)){
 					pstmt.setInt(1, num);
 				return pstmt.executeUpdate();
 		} catch (SQLException e) {

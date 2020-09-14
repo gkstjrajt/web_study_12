@@ -89,6 +89,15 @@ public class Board {
 		this.num = num;
 	}
 	
+	public Board(String name, String email, String pass, String title, String content) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.pass = pass;
+		this.title = title;
+		this.content = content;
+	}
+
 	public Board(String name, String email, String pass, String title, String content, int readCount, Date writeDate) {
 		super();
 		this.name = name;
